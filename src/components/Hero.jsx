@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Github } from 'lucide-react';
+import ProfilePic from '../assets/WhatsApp Image 2026-03-13 at 08.35.21.jpeg';
 
 const Hero = () => {
   return (
@@ -100,21 +101,19 @@ const Hero = () => {
             borderRadius: '40px', 
             overflow: 'hidden',
             position: 'relative',
-            zIndex: 1
+            zIndex: 1,
+            border: '2px solid var(--border-card)'
           }}>
-            <div style={{ 
-              width: '100%', 
-              height: '100%', 
-              background: 'linear-gradient(45deg, #1e1b4b 0%, #312e81 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '8rem',
-              color: 'rgba(255,255,255,0.1)',
-              fontWeight: 800
-            }}>
-              LC
-            </div>
+            <img 
+              src={ProfilePic} 
+              alt="Lalit Kr Choudhary" 
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover',
+                objectPosition: 'center 20%' 
+              }} 
+            />
           </div>
           <div 
             style={{ 
