@@ -22,7 +22,7 @@ const CertificateModal = ({ isOpen, onClose, imageUrl, title }) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
           zIndex: 1100,
           display: 'flex',
           alignItems: 'center',
@@ -45,22 +45,22 @@ const CertificateModal = ({ isOpen, onClose, imageUrl, title }) => {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            background: '#fff',
-            border: 'none',
+            background: 'var(--bg-dark)',
+            border: '1px solid var(--border-card)',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
           }}
         >
-          <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-dark)' }}>
-            <h3 style={{ fontSize: '1.1rem', color: '#fff' }}>{title}</h3>
-            <button onClick={onClose} style={{ color: '#fff', transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7 }}>
+          <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border-card)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(139, 92, 246, 0.05)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>{title}</h3>
+            <button onClick={onClose} style={{ color: 'var(--text-secondary)', transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7 }}>
               <X size={20} />
             </button>
           </div>
-          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '0.5rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
             <img 
               src={imageUrl} 
               alt={title} 
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '4px' }} 
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px', border: '1px solid var(--border-card)' }} 
             />
           </div>
         </motion.div>
@@ -138,7 +138,7 @@ const ExperienceItem = ({ role, company, period, description, points, color, onS
       <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 500, fontSize: '0.95rem' }}>{description}</p>
       
       <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-        {points.map((point, i) => (
+        {experiences?.[0]?.points.map((point, i) => (
           <li key={i} style={{ display: 'flex', gap: '0.6rem', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
             <ChevronRight size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '2px' }} />
             <span>{point}</span>
@@ -195,13 +195,96 @@ const Experience = () => {
       </div>
 
       <div style={{ position: 'relative' }}>
-        {experiences.map((exp, index) => (
-          <ExperienceItem 
-            key={index} 
-            {...exp} 
-            onShowCert={() => setActiveCert(exp)}
-          />
-        ))}
+        {experiences.map((exp, index) => {
+          // Fix for the points mapping in ExperienceItem
+          const ItemWithPoints = (props) => (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={{ position: 'relative', paddingLeft: '2.5rem', marginBottom: '3.5rem' }}
+            >
+              <div style={{ 
+                position: 'absolute', 
+                left: '0.75rem', 
+                top: '0', 
+                bottom: '-3.5rem', 
+                width: '2px', 
+                background: 'var(--border-card)' 
+              }} />
+              
+              <div style={{ 
+                position: 'absolute', 
+                left: '0', 
+                top: '0.5rem', 
+                width: '1.5rem', 
+                height: '1.5rem', 
+                borderRadius: '50%', 
+                background: props.color || 'var(--accent-primary)',
+                border: '4px solid var(--bg-dark)',
+                zIndex: 1
+              }} />
+
+              <div className="glass" style={{ padding: '1.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+                  <div style={{ minWidth: '200px', flex: '1' }}>
+                    <h3 style={{ fontSize: '1.35rem', marginBottom: '0.25rem' }}>{props.role}</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
+                      <Briefcase size={16} />
+                      <span>{props.company}</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', width: '100%', maxWidth: 'max-content' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+                      <Calendar size={16} />
+                      <span>{props.period}</span>
+                    </div>
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={props.onShowCert}
+                      style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.4rem', 
+                        fontSize: '0.75rem', 
+                        color: 'var(--accent-primary)', 
+                        fontWeight: 600,
+                        background: 'rgba(139, 92, 246, 0.1)',
+                        padding: '0.4rem 0.8rem',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <ExternalLink size={12} /> View Certificate
+                    </motion.button>
+                  </div>
+                </div>
+
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 500, fontSize: '0.95rem' }}>{props.description}</p>
+                
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  {props.points.map((point, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '0.6rem', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                      <ChevronRight size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '2px' }} />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          );
+
+          return (
+            <ItemWithPoints 
+              key={index} 
+              {...exp} 
+              onShowCert={() => setActiveCert(exp)}
+            />
+          );
+        })}
       </div>
 
       <CertificateModal 

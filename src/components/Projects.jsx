@@ -18,7 +18,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
           zIndex: 1100,
           display: 'flex',
           alignItems: 'center',
@@ -60,7 +60,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
           <div style={{ flexGrow: 1, overflowY: 'auto', padding: '1.5rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
               {project.details?.map((detail, idx) => (
-                <div key={idx} style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid var(--border-card)' }}>
+                <div key={idx} style={{ padding: '1.25rem', background: 'var(--bg-card)', borderRadius: '16px', border: '1px solid var(--border-card)' }}>
                   <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     {detail.icon && <detail.icon size={16} />} {detail.subtitle}
                   </h4>
@@ -108,8 +108,8 @@ const ProjectCard = ({ project, delay, onShowDetails }) => {
             <Icon size={20} />
           </div>
           <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><Github size={18} className="text-secondary hover:text-primary transition-colors" /></motion.a>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><ExternalLink size={18} className="text-secondary hover:text-primary transition-colors" /></motion.a>
+            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><Github size={18} className="text-secondary hover:text-primary transition-colors" style={{ color: 'var(--text-secondary)' }} /></motion.a>
+            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><ExternalLink size={18} className="text-secondary hover:text-primary transition-colors" style={{ color: 'var(--text-secondary)' }} /></motion.a>
           </div>
         </div>
         
@@ -215,7 +215,7 @@ const Projects = () => {
         <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Sophisticated AI agents and robust enterprise backends built for scale.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+      <div className="grid-responsive" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
         {projectData.map((project, index) => (
           <ProjectCard 
             key={index} 

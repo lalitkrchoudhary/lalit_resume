@@ -1,18 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Sun, Moon } from 'lucide-react';
+
+const ThemeToggle = ({ theme, toggleTheme }) => (
+  <motion.button
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    onClick={toggleTheme}
+    style={{
+      padding: '0.5rem',
+      borderRadius: '12px',
+      background: 'rgba(139, 92, 246, 0.1)',
+      color: 'var(--accent-primary)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: '1px solid rgba(139, 92, 246, 0.2)'
+    }}
+  >
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={theme}
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 10, opacity: 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+      </motion.div>
+    </AnimatePresence>
+  </motion.button>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // Theme initialization
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -59,7 +99,7 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Nav */}
-          <div className="md-flex" style={{ display: 'none', gap: '2rem', alignItems: 'center' }}>
+          <div className="md-flex" style={{ display: 'none', gap: '1.5rem', alignItems: 'center' }}>
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
@@ -70,7 +110,8 @@ const Navbar = () => {
               </a>
             ))}
             <div style={{ width: '1px', height: '20px', background: 'var(--border-card)', margin: '0 0.5rem' }} />
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
               <a href="https://github.com/lalitkrchoudhary" target="_blank" rel="noopener noreferrer">
                 <Github size={18} style={{ color: 'var(--text-secondary)' }} />
               </a>
@@ -80,14 +121,16 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="md-hidden" 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            style={{ color: 'var(--text-primary)', padding: '0.25rem' }}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="md-hidden" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              style={{ color: 'var(--text-primary)', padding: '0.25rem' }}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -109,7 +152,7 @@ const Navbar = () => {
               padding: '2rem',
               zIndex: 999,
               border: '1px solid var(--border-card)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
               display: 'flex',
               flexDirection: 'column',
               gap: '1.5rem'
