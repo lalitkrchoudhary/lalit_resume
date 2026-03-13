@@ -79,11 +79,11 @@ const Skills = () => {
   return (
     <section id="skills" className="section-container">
       <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Technical <span className="gradient-text">Mastery</span></h2>
+        <h2 style={{ marginBottom: '1rem' }}>Technical <span className="gradient-text">Mastery</span></h2>
         <p style={{ color: 'var(--text-secondary)' }}>Advanced expertise in AI-driven CRM architectures and enterprise cloud infrastructures.</p>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+      <div className="grid-responsive" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
         {categories.map((cat, index) => (
           <SkillCategory key={cat.title} {...cat} delay={index * 0.1} />
         ))}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Code, Bot, Server, Shield, Globe, Zap, X, Database, Cloud, Brain } from 'lucide-react';
+import { ExternalLink, Github, Code, Bot, Server, Shield, Globe, Zap, X, Database, Brain } from 'lucide-react';
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
   if (!isOpen || !project) return null;
@@ -24,7 +24,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
           alignItems: 'center',
           justifyContent: 'center',
           backdropFilter: 'blur(10px)',
-          padding: '2rem'
+          padding: '1rem'
         }}
       >
         <motion.div
@@ -45,28 +45,28 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
             border: '1px solid var(--border-card)'
           }}
         >
-          <div style={{ padding: '1.5rem 2.5rem', borderBottom: '1px solid var(--border-card)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border-card)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ padding: '0.5rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '8px', color: 'var(--accent-primary)' }}>
-                {project.icon && <project.icon size={24} />}
+                {project.icon && <project.icon size={20} />}
               </div>
-              <h3 style={{ fontSize: '1.5rem' }}>{project.title}</h3>
+              <h3 style={{ fontSize: '1.15rem' }}>{project.title}</h3>
             </div>
             <button onClick={onClose} style={{ color: 'var(--text-secondary)', transition: 'color 0.2s', background: 'none', border: 'none', cursor: 'pointer' }}>
-              <X size={24} />
+              <X size={20} />
             </button>
           </div>
           
-          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '2.5rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
               {project.details?.map((detail, idx) => (
-                <div key={idx} style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid var(--border-card)' }}>
-                  <h4 style={{ color: 'var(--accent-primary)', marginBottom: '1rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    {detail.icon && <detail.icon size={18} />} {detail.subtitle}
+                <div key={idx} style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid var(--border-card)' }}>
+                  <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    {detail.icon && <detail.icon size={16} />} {detail.subtitle}
                   </h4>
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                     {detail.points.map((p, i) => (
-                      <li key={i} style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', display: 'flex', gap: '0.75rem', lineHeight: '1.5' }}>
+                      <li key={i} style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'flex', gap: '0.5rem', lineHeight: '1.5' }}>
                         <span style={{ color: 'var(--accent-primary)', flexShrink: 0 }}>•</span> {p}
                       </li>
                     ))}
@@ -75,9 +75,9 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
               ))}
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', borderTop: '1px solid var(--border-card)', paddingTop: '2rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', borderTop: '1px solid var(--border-card)', paddingTop: '1.5rem' }}>
               {project.tech.split(',').map(item => (
-                <span key={item} style={{ padding: '0.5rem 1.25rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '100px', fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
+                <span key={item} style={{ padding: '0.4rem 0.8rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '100px', fontSize: '0.75rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
                   {item.trim()}
                 </span>
               ))}
@@ -102,27 +102,27 @@ const ProjectCard = ({ project, delay, onShowDetails }) => {
       whileHover={{ y: -5, borderColor: 'var(--accent-primary)' }}
       onClick={onShowDetails}
     >
-      <div style={{ padding: '2.5rem', flexGrow: 1 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <div style={{ padding: '0.75rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '12px', color: 'var(--accent-primary)' }}>
-            <Icon size={24} />
+      <div style={{ padding: '2rem', flexGrow: 1 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+          <div style={{ padding: '0.6rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
+            <Icon size={20} />
           </div>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><Github size={20} className="text-secondary hover:text-primary transition-colors" /></motion.a>
-            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><ExternalLink size={20} className="text-secondary hover:text-primary transition-colors" /></motion.a>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><Github size={18} className="text-secondary hover:text-primary transition-colors" /></motion.a>
+            <motion.a whileHover={{ scale: 1.1 }} href="#" onClick={(e) => e.stopPropagation()}><ExternalLink size={18} className="text-secondary hover:text-primary transition-colors" /></motion.a>
           </div>
         </div>
         
-        <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{project.title}</h3>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '1rem', lineHeight: '1.6' }}>{project.summary}</p>
+        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>{project.title}</h3>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>{project.summary}</p>
         
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: 'auto' }}>
-          {project.tech.split(',').slice(0, 4).map(item => (
-            <span key={item} style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
+          {project.tech.split(',').slice(0, 3).map(item => (
+            <span key={item} style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               #{item.trim()}
             </span>
           ))}
-          {project.tech.split(',').length > 4 && <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem' }}>+more</span>}
+          {project.tech.split(',').length > 3 && <span style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}>+more</span>}
         </div>
       </div>
     </motion.div>
@@ -210,12 +210,12 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-container">
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-        <h2 style={{ fontSize: '3.5rem', marginBottom: '1.25rem' }}>Strategic <span className="gradient-text">Engineering</span></h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem' }}>Sophisticated AI agents and robust enterprise backends built for scale.</p>
+      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Strategic <span className="gradient-text">Engineering</span></h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Sophisticated AI agents and robust enterprise backends built for scale.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '2.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
         {projectData.map((project, index) => (
           <ProjectCard 
             key={index} 

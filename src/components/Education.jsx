@@ -1,39 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, Calendar, Award } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 
-const EducationCard = ({ degree, institution, location, period, score, scoreLabel, delay }) => (
+const EducationCard = ({ school, degree, period, location, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay }}
     className="glass"
-    style={{ padding: '2.5rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '2rem', alignItems: 'center', marginBottom: '2rem' }}
+    style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column' }}
   >
-    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-      <div style={{ padding: '0.85rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '16px', color: 'var(--accent-primary)' }}>
-        <GraduationCap size={32} />
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', gap: '1rem', flexWrap: 'wrap' }}>
+      <div style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: 'var(--accent-secondary)' }}>
+        <GraduationCap size={24} />
       </div>
-      <div>
-        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{degree}</h3>
-        <div style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', fontWeight: 600 }}>{institution}</div>
-      </div>
-    </div>
-
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', minWidth: '200px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-        <MapPin size={16} />
-        <span>{location}</span>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
         <Calendar size={16} />
         <span>{period}</span>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-primary)' }}>
-        <Award size={18} />
-        <span>{scoreLabel}: {score}</span>
-      </div>
+    </div>
+
+    <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{school}</h3>
+    <p style={{ color: 'var(--accent-secondary)', fontWeight: 600, marginBottom: '1.5rem', fontSize: '1.1rem' }}>{degree}</p>
+    
+    <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+      <MapPin size={16} />
+      <span>{location}</span>
     </div>
   </motion.div>
 );
@@ -41,35 +34,31 @@ const EducationCard = ({ degree, institution, location, period, score, scoreLabe
 const Education = () => {
   const educationData = [
     {
-      degree: "Master of Computer Applications",
-      institution: "Tezpur University",
-      location: "Tezpur, Assam",
-      period: "Nov 2022 - June 2024",
-      score: "7.1 (current)",
-      scoreLabel: "CGPA",
-      delay: 0
+      school: 'Tezpur University',
+      degree: 'Master of Computer Applications',
+      period: 'Nov 2022 - June 2024',
+      location: 'Tezpur, Assam',
+      grade: 'CGPA: 7.1 (current)'
     },
     {
-      degree: "Bachelor of Computer Applications",
-      institution: "Dispur College",
-      location: "Guwahati, Assam",
-      period: "April 2018 - July 2021",
-      score: "7.11",
-      scoreLabel: "Percentage",
-      delay: 0.1
+      school: 'Dispur College',
+      degree: 'Bachelor of Computer Applications',
+      period: 'April 2018 - July 2021',
+      location: 'Guwahati, Assam',
+      grade: 'Percentage: 7.11'
     }
   ];
 
   return (
     <section id="education" className="section-container">
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Academic <span className="gradient-text">Foundation</span></h2>
-        <p style={{ color: 'var(--text-secondary)' }}>Formal training and technical education that shaped my career.</p>
+      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Academic <span className="gradient-text">Foundation</span></h2>
+        <p style={{ color: 'var(--text-secondary)' }}>Rooted in computer science excellence and continuous learning.</p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="grid-responsive" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
         {educationData.map((edu, index) => (
-          <EducationCard key={index} {...edu} />
+          <EducationCard key={index} {...edu} delay={index * 0.1} />
         ))}
       </div>
     </section>

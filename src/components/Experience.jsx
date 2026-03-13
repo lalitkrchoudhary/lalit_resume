@@ -23,12 +23,12 @@ const CertificateModal = ({ isOpen, onClose, imageUrl, title }) => {
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.95)',
-          zIndex: 1000,
+          zIndex: 1100,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           backdropFilter: 'blur(12px)',
-          padding: '2rem'
+          padding: '1rem'
         }}
       >
         <motion.div
@@ -50,13 +50,13 @@ const CertificateModal = ({ isOpen, onClose, imageUrl, title }) => {
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
           }}
         >
-          <div style={{ padding: '1.25rem 2rem', borderBottom: '1px solid rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-dark)' }}>
-            <h3 style={{ fontSize: '1.25rem', color: '#fff' }}>{title}</h3>
+          <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-dark)' }}>
+            <h3 style={{ fontSize: '1.1rem', color: '#fff' }}>{title}</h3>
             <button onClick={onClose} style={{ color: '#fff', transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7 }}>
-              <X size={24} />
+              <X size={20} />
             </button>
           </div>
-          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+          <div style={{ flexGrow: 1, overflowY: 'auto', padding: '0.5rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
             <img 
               src={imageUrl} 
               alt={title} 
@@ -75,13 +75,13 @@ const ExperienceItem = ({ role, company, period, description, points, color, onS
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.6 }}
-    style={{ position: 'relative', paddingLeft: '3rem', marginBottom: '4rem' }}
+    style={{ position: 'relative', paddingLeft: '2.5rem', marginBottom: '3.5rem' }}
   >
     <div style={{ 
       position: 'absolute', 
       left: '0.75rem', 
       top: '0', 
-      bottom: '-4rem', 
+      bottom: '-3.5rem', 
       width: '2px', 
       background: 'var(--border-card)' 
     }} />
@@ -98,16 +98,16 @@ const ExperienceItem = ({ role, company, period, description, points, color, onS
       zIndex: 1
     }} />
 
-    <div className="glass" style={{ padding: '2.5rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div>
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{role}</h3>
+    <div className="glass" style={{ padding: '1.75rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+        <div style={{ minWidth: '200px', flex: '1' }}>
+          <h3 style={{ fontSize: '1.35rem', marginBottom: '0.25rem' }}>{role}</h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
             <Briefcase size={16} />
             <span>{company}</span>
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', width: '100%', maxWidth: 'max-content' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
             <Calendar size={16} />
             <span>{period}</span>
@@ -135,12 +135,12 @@ const ExperienceItem = ({ role, company, period, description, points, color, onS
         </div>
       </div>
 
-      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontWeight: 500 }}>{description}</p>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 500, fontSize: '0.95rem' }}>{description}</p>
       
-      <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
         {points.map((point, i) => (
-          <li key={i} style={{ display: 'flex', gap: '0.75rem', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-            <ChevronRight size={18} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
+          <li key={i} style={{ display: 'flex', gap: '0.6rem', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
+            <ChevronRight size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '2px' }} />
             <span>{point}</span>
           </li>
         ))}
@@ -159,12 +159,11 @@ const Experience = () => {
       period: 'Aug 11, 2025 – Feb 01, 2026',
       description: 'Architecting Cleopatra Backend—a sophisticated, AI-driven CRM for high-stakes relationship management.',
       points: [
-        'Developed a RAG-based AI Chat Service using GPT-4 and Embeddings, enabling semantic search across thousands of meeting transcripts and email threads.',
-        'Engineered an OAuth 2.0 synchronization engine for Gmail and Google Calendar, managing org-wide interactions with strict cross-owner isolation.',
-        'Implemented "Dynamic Token Optimization" for AI analysis, reducing operational costs by ~40% through intelligent re-summarization triggers.',
-        'Built automated intelligence pipelines to extract structured action items, sentiment analysis, and decisions from Zoom/TLDV recordings.',
-        'Integrated Perplexity API for automated professional enrichment and background intelligence on global investors.',
-        'Configured hybrid background task infrastructures (Celery + AWS SQS) and S3 storage for secure high-definition transcript scaling.'
+        'Developed a RAG-based AI Chat Service using GPT-4 and Embeddings, enabling semantic search across meeting transcripts and email threads.',
+        'Engineered an OAuth 2.0 sync engine for Gmail and Google Calendar with org-wide interaction tracking.',
+        'Implemented "Dynamic Token Optimization" for AI analysis, reducing operational costs by ~40%.',
+        'Built automated intelligence pipelines to extract action items, sentiment, and decisions from Zoom/TLDV recordings.',
+        'Integrated Perplexity API for automated professional enrichment and background intelligence on global investors.'
       ],
       color: '#8b5cf6',
       title: 'Whatbytes Internship Certificate',
@@ -190,9 +189,9 @@ const Experience = () => {
 
   return (
     <section id="experience" className="section-container">
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Professional <span className="gradient-text">Journey</span></h2>
-        <p style={{ color: 'var(--text-secondary)' }}>Developing high-performance architectures and intelligent AI-driven platforms.</p>
+      <div style={{ marginBottom: '3rem' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Professional <span className="gradient-text">Journey</span></h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Developing high-performance architectures and intelligent AI-driven platforms.</p>
       </div>
 
       <div style={{ position: 'relative' }}>
